@@ -49,6 +49,7 @@ resource "aws_instance" "new-instance" {
 
     provisioner "remote-exec" {
     inline = [
+        "sudo -i",
         "sudo yum install httpd -y",
         "sudo systemctl start httpd",
         "sudo systemctl enable httpd"
