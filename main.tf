@@ -57,10 +57,13 @@ resource "aws_instance" "new-instance" {
 
     provisioner "local-exec" {
         command = "mkdir /new"
+    }
+
+    provisioner "local-exec" {
         command = "echo 'Hello,Abhimanyu Patil' > /new/index.html"
         # command = "echo ${self.public_ip} >> ips.txt"
     }
-
+    
     provisioner "file" {
         source = "${path.module}/new/index.html"
         destination = "/var/www/html/index.html"
