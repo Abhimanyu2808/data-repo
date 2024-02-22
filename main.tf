@@ -61,7 +61,7 @@ resource "aws_instance" "new-instance" {
     }
 
     provisioner "file" {
-        source = "index.html"
+        source      = "path/to/local/index.html"
         destination = "/var/www/html/index.html"
     }
 }
