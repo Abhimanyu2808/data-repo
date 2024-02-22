@@ -49,23 +49,20 @@ resource "aws_instance" "new-instance" {
 
     provisioner "remote-exec" {
     inline = [
-        "sudo yum install httpd -y",
-        "sudo systemctl start httpd",
-        "sudo systemctl enable httpd"
-        ]
-    }
+      "sudo yum install httpd -y",
+      "sudo systemctl start httpd",
+      "sudo systemctl enable httpd"
+    ]
+  }
 
     provisioner "local-exec" {
-        command = "mkdir /new"
-    }
-
-    provisioner "local-exec" {
-        command = "echo 'Hello,Abhimanyu Patil' > /new/index.html"
-        # command = "echo ${self.public_ip} >> ips.txt"
-    }
+    command = <<-EOT
+      echo "<h1>Hello,ABHIMANYU PATIL</h1>" > index.html
+    EOT
+  }
     
     provisioner "file" {
-        source = "${path.module}/new/index.html"
-        destination = "/var/www/html/index.html"
-    }
+    source      = "index.html"
+    destination = "/var/www/html/index.html"
+  }
 }
